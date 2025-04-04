@@ -1,17 +1,26 @@
+#Get the dependencies
 import click
 import requests
 import json
 from pathlib import Path
 
+from cache import load_cache, save_cache
+import scraper 
 
-def load_verses():
-    verses_Path = Path(__file__).parent / "verses.json"
-    with open(verses_Path, "r") as f:
-        return json.load(f)
+#Define the function to load the verses from the cache file
+def load_cache():
+    if CACHE_FILE.exists:
+        with open(CACHE_FILE, "r") as f:
+            return json.load(f)
+    return{}
+
+#Function to get verses from the cache file
+def get_cached_verses(topic):
+    cache = load_cache()
+    return cache.get(topic, None)
     
 @click.command()
-#I opt to use APIs to get verses and hence the cli app will have to have access to internet.
-#Learn how to use API in python.
+
 
 #Options: API.bible, 
 @click.argument("emotion")
